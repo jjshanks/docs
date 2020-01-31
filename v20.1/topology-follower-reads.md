@@ -45,7 +45,7 @@ Assuming you have a [cluster deployed across three regions](#cluster-setup) and 
 ~~~ sql
 > CREATE TABLE postal_codes (
     id INT PRIMARY KEY,
-    code STRING,
+    code STRING
 );
 ~~~
 
@@ -60,8 +60,8 @@ Assuming you have a [cluster deployed across three regions](#cluster-setup) and 
     {% include copy-clipboard.html %}
     ~~~ sql
     > SELECT code FROM postal_codes
-        WHERE id = 5
-        AS OF SYSTEM TIME experimental_follower_read_timestamp();
+        AS OF SYSTEM TIME experimental_follower_read_timestamp()
+                WHERE id = 5;
     ~~~
 
     Alternately, instead of modifying individual read queries on the table, you can set the `AS OF SYSTEM TIME` value for all operations in a read-only transaction:
